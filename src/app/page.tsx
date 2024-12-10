@@ -1,22 +1,36 @@
 import NavBar from "@/components/nav-bar";
 import RootLayout from "./layout";
 import Image from "next/image";
+import { getMovies } from "@/actions/movie";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import FavoriteButton from "@/components/favorite-button";
 
-export default function Home(): JSX.Element {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Record<string, string | undefined>;
+}): Promise<JSX.Element> {
+  const page = searchParams.page || "1";
+  const movies = await getMovies(page);
   return (
     <RootLayout>
       <NavBar />
-      <div className="relative flex aspect-video items-center justify-center lg:aspect-[4/1]">
+      <div className="relative flex aspect-video items-center justify-center shadow-xl lg:aspect-[4/1]">
         <Image
           src="/bannerr.jpeg"
           alt="banner"
           fill
           style={{
             filter: "drop-shadow(0 0 5px rgba(0, 0, 0, 5))",
-            maskImage: "linear-gradient(black 60%, transparent)",
+            maskImage: "linear-gradient(black 30%, transparent)",
           }}
         />
-        <div className="absolute bottom-0 p-2 text-white">
+        <div className="absolute bottom-0 p-2">
           <h2 className="text-xl font-bold lg:text-4xl">Kung Fu Panda 4</h2>
           <p className="text-sm font-bold lg:w-1/3 lg:text-xl">
             Join Po and the Furious Five on a new epic adventure! Discover the
@@ -24,6 +38,36 @@ export default function Home(): JSX.Element {
             your inner warrior! 🥋✨
           </p>
         </div>
+      </div>
+      <div className="grid grid-cols-2 gap-3 px-4 py-8 lg:grid-cols-4 xl:grid-cols-5">
+        {movies.results.map((movie) => (
+          <Card
+            key={`movie-${movie.id}`}
+            className="cursor-pointer overflow-hidden bg-gray-700 transition hover:scale-[1.03]"
+          >
+            <CardHeader className="relative aspect-square">
+              <Image
+                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                alt={movie.title}
+                fill
+              />
+              <FavoriteButton />
+            </CardHeader>
+            <CardContent className="p-2">
+              <h1 className="truncate text-start text-base font-semibold text-white">
+                {movie.title}
+              </h1>
+              <span className="text-xs text-white/30">
+                {movie.release_date}{" "}
+              </span>
+              <div className="mt-3">
+                <h2 className="text-start text-sm text-white/30">SUMMARY</h2>
+                <p className="text-xs text-white/30">{movie.overview}</p>
+              </div>
+            </CardContent>
+            <CardFooter className="flex justify-between"></CardFooter>
+          </Card>
+        ))}
       </div>
     </RootLayout>
   );
