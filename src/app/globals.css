@@ -16,6 +16,10 @@ h1 {
   font-size: 2rem;
 }
 
+body {
+  background: #000;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
