@@ -78,7 +78,10 @@ export default async function Home({
           </Card>
         ))}
       </div>
-      <MoviePagination currentPage={movies.page} />
+      <MoviePagination
+        currentPage={movies.page}
+        totalPages={movies.total_pages}
+      />
     </RootLayout>
   );
 }
