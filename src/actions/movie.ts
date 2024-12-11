@@ -1,6 +1,6 @@
 "use server";
 
-import { IResponseTMDB } from "@/interfaces/TMDB";
+import { IMovieDetailTMDB, IResponseTMDB } from "@/interfaces/TMDB";
 
 export const getMovies = async (page: string = "1"): Promise<IResponseTMDB> => {
   try {
@@ -58,5 +58,28 @@ export const getMoviesByQuery = async (
       total_results: 0,
       page: 0,
     } as IResponseTMDB;
+  }
+};
+
+export const getMovieById = async (id: number): Promise<IMovieDetailTMDB> => {
+  try {
+    const url = `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits,videos`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
+      },
+    };
+
+    const res = await fetch(url, options);
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    const json: IMovieDetailTMDB = await res.json();
+    return json;
+  } catch (error) {
+    return {} as IMovieDetailTMDB;
   }
 };
