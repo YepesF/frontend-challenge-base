@@ -4,11 +4,6 @@ module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx,mdx}",],
 	theme: {
 		extend: {
-			colors: {
-				primary: "#090E17",
-				secondary: "#303D4F",
-				accent: "#F0B90B",
-			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -26,20 +21,20 @@ module.exports = {
 					foreground: 'hsl(var(--popover-foreground))'
 				},
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: '#090E17',
+					foreground: '#090E17'
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
+					DEFAULT: '#303D4F',
+					foreground: '#303D4F'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					DEFAULT: '#F0B90B',
+					foreground: '#F0B90B'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',

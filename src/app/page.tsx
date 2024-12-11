@@ -1,15 +1,11 @@
 import RootLayout from "./layout";
 import Image from "next/image";
 import { getMovies, getMoviesByQuery } from "@/actions/movie";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 import FavoriteButton from "@/components/favorite-button";
 import MoviePagination from "@/components/movie-pagination";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function Home({
   searchParams,
@@ -18,15 +14,21 @@ export default async function Home({
 }): Promise<JSX.Element> {
   const page = searchParams.page || "1";
   const query = searchParams.query || "";
+  const movieBanner = (await getMovies()).results[0];
   const movies = query
     ? await getMoviesByQuery(query, page)
     : await getMovies(page);
 
   return (
     <RootLayout>
-      <div className="relative flex aspect-video items-center justify-center shadow-xl lg:aspect-[4/1]">
+      <div className="fixed left-5 top-10 z-50 w-min">
+        <div className="relative h-10 w-40">
+          <Image src="/Logo.png" alt="logo" fill />
+        </div>
+      </div>
+      <div className="relative flex h-[50vh] items-center justify-center shadow-xl">
         <Image
-          src="/bannerr.jpeg"
+          src={`https://image.tmdb.org/t/p/original${movieBanner.poster_path}`}
           alt="banner"
           fill
           style={{
@@ -34,20 +36,32 @@ export default async function Home({
             maskImage: "linear-gradient(black 30%, transparent)",
           }}
         />
-        <div className="absolute bottom-0 p-2">
-          <h2 className="text-xl font-bold lg:text-4xl">Kung Fu Panda 4</h2>
-          <p className="text-sm font-bold lg:w-1/3 lg:text-xl">
-            Join Po and the Furious Five on a new epic adventure! Discover the
-            power of friendship and the strength within! Get ready to unleash
-            your inner warrior! 🥋✨
-          </p>
+
+        <div className="absolute bottom-10 left-5 z-50 flex w-fit flex-col items-start justify-start">
+          <div className="flex items-center justify-start gap-2">
+            <div className="relative h-10 w-10">
+              <Image src="/imdb.png" alt="imdb" fill />
+            </div>
+            <span className="w-min font-semibold text-white">
+              {movieBanner.vote_average.toFixed(1)}
+            </span>
+          </div>
+          <h1 className="w-fit text-2xl font-bold text-white">
+            {movieBanner.title}
+          </h1>
+          <div className="flex w-72 items-center justify-between pt-6">
+            <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
+              Watch now
+            </Button>
+            <FavoriteButton />
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3 px-4 py-8 lg:grid-cols-4 xl:grid-cols-5">
         {movies.results.map((movie) => (
           <Link key={`movie-${movie.id}`} href={`/movies/${movie.id}`}>
             <Card className="cursor-pointer overflow-hidden bg-gray-700 transition hover:scale-[1.03]">
-              <CardHeader className="relative aspect-square">
+              <CardHeader className="relative aspect-[2/3]">
                 <Image
                   src={
                     movie.poster_path
@@ -57,23 +71,18 @@ export default async function Home({
                   alt={movie.title}
                   fill
                 />
-                <FavoriteButton />
-              </CardHeader>
-              <CardContent className="p-2">
-                <h1 className="truncate text-start text-base font-semibold text-white">
-                  {movie.title}
-                </h1>
-                <span className="text-xs text-white/30">
-                  {movie.release_date || "0000-00-00"}{" "}
-                </span>
-                <div className="mt-3 h-20 max-w-sm">
-                  <h2 className="text-start text-sm text-white/30">SUMMARY</h2>
-                  <p className="line-clamp-4 text-xs text-white/30">
-                    {movie.overview}
-                  </p>
+                <div className="absolute -left-0 top-2 flex w-full items-center justify-between px-4">
+                  <div className="flex w-fit items-center justify-start gap-2 rounded-full bg-secondary/30 px-2">
+                    <div className="relative h-6 w-6">
+                      <Image src="/imdb.png" alt="imdb" fill />
+                    </div>
+                    <span className="w-min font-semibold text-white">
+                      {movieBanner.vote_average.toFixed(1)}
+                    </span>
+                  </div>
+                  <FavoriteButton />
                 </div>
-              </CardContent>
-              <CardFooter className="flex justify-between"></CardFooter>
+              </CardHeader>
             </Card>
           </Link>
         ))}
