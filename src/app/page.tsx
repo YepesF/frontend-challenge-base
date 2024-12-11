@@ -9,6 +9,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import FavoriteButton from "@/components/favorite-button";
+import MoviePagination from "@/components/movie-pagination";
 
 export default async function Home({
   searchParams,
@@ -17,6 +18,7 @@ export default async function Home({
 }): Promise<JSX.Element> {
   const page = searchParams.page || "1";
   const movies = await getMovies(page);
+
   return (
     <RootLayout>
       <NavBar />
@@ -69,6 +71,7 @@ export default async function Home({
           </Card>
         ))}
       </div>
+      <MoviePagination currentPage={movies.page} />
     </RootLayout>
   );
 }
