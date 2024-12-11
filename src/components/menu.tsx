@@ -1,8 +1,8 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import Link from "next/link";
 import { Separator } from "./ui/separator";
+import SearchMovie from "./search-movie";
 
 export default function Menu(): JSX.Element {
   return (
@@ -27,25 +27,7 @@ export default function Menu(): JSX.Element {
       </SheetTrigger>
       <SheetContent className="w-80">
         <div className="mt-6 flex flex-col items-center gap-6">
-          <div className="flex gap-2">
-            <Input type="text" placeholder="Search..." />
-            <Button variant="outline" size="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </Button>
-          </div>
+          <SearchMovie />
           <Separator />
           <ul className="flex flex-col">
             <li>
