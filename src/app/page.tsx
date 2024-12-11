@@ -1,4 +1,3 @@
-import NavBar from "@/components/nav-bar";
 import RootLayout from "./layout";
 import Image from "next/image";
 import { getMovies, getMoviesByQuery } from "@/actions/movie";
@@ -25,7 +24,6 @@ export default async function Home({
 
   return (
     <RootLayout>
-      <NavBar />
       <div className="relative flex aspect-video items-center justify-center shadow-xl lg:aspect-[4/1]">
         <Image
           src="/bannerr.jpeg"
