@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import FavoriteButton from "@/components/favorite-button";
 import MoviePagination from "@/components/movie-pagination";
+import Link from "next/link";
 
 export default async function Home({
   searchParams,
@@ -46,36 +47,37 @@ export default async function Home({
       </div>
       <div className="grid grid-cols-2 gap-3 px-4 py-8 lg:grid-cols-4 xl:grid-cols-5">
         {movies.results.map((movie) => (
-          <Card
-            key={`movie-${movie.id}`}
-            className="cursor-pointer overflow-hidden bg-gray-700 transition hover:scale-[1.03]"
-          >
-            <CardHeader className="relative aspect-square">
-              <Image
-                src={
-                  movie.poster_path
-                    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
-                    : "/default-movie.webp"
-                }
-                alt={movie.title}
-                fill
-              />
-              <FavoriteButton />
-            </CardHeader>
-            <CardContent className="p-2">
-              <h1 className="truncate text-start text-base font-semibold text-white">
-                {movie.title}
-              </h1>
-              <span className="text-xs text-white/30">
-                {movie.release_date || "0000-00-00"}{" "}
-              </span>
-              <div className="mt-3">
-                <h2 className="text-start text-sm text-white/30">SUMMARY</h2>
-                <p className="text-xs text-white/30">{movie.overview}</p>
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-between"></CardFooter>
-          </Card>
+          <Link key={`movie-${movie.id}`} href={`/movies/${movie.id}`}>
+            <Card className="cursor-pointer overflow-hidden bg-gray-700 transition hover:scale-[1.03]">
+              <CardHeader className="relative aspect-square">
+                <Image
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+                      : "/default-movie.webp"
+                  }
+                  alt={movie.title}
+                  fill
+                />
+                <FavoriteButton />
+              </CardHeader>
+              <CardContent className="p-2">
+                <h1 className="truncate text-start text-base font-semibold text-white">
+                  {movie.title}
+                </h1>
+                <span className="text-xs text-white/30">
+                  {movie.release_date || "0000-00-00"}{" "}
+                </span>
+                <div className="mt-3 h-20 max-w-sm">
+                  <h2 className="text-start text-sm text-white/30">SUMMARY</h2>
+                  <p className="line-clamp-4 text-xs text-white/30">
+                    {movie.overview}
+                  </p>
+                </div>
+              </CardContent>
+              <CardFooter className="flex justify-between"></CardFooter>
+            </Card>
+          </Link>
         ))}
       </div>
       <MoviePagination
