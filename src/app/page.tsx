@@ -1,7 +1,7 @@
 import NavBar from "@/components/nav-bar";
 import RootLayout from "./layout";
 import Image from "next/image";
-import { getMovies } from "@/actions/movie";
+import { getMovies, getMoviesByQuery } from "@/actions/movie";
 import {
   Card,
   CardContent,
@@ -17,7 +17,10 @@ export default async function Home({
   searchParams: Record<string, string | undefined>;
 }): Promise<JSX.Element> {
   const page = searchParams.page || "1";
-  const movies = await getMovies(page);
+  const query = searchParams.query || "";
+  const movies = query
+    ? await getMovies(page)
+    : await getMoviesByQuery(query, page);
 
   return (
     <RootLayout>
@@ -49,7 +52,11 @@ export default async function Home({
           >
             <CardHeader className="relative aspect-square">
               <Image
-                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+                    : "/default-movie.webp"
+                }
                 alt={movie.title}
                 fill
               />
@@ -60,7 +67,7 @@ export default async function Home({
                 {movie.title}
               </h1>
               <span className="text-xs text-white/30">
-                {movie.release_date}{" "}
+                {movie.release_date || "0000-00-00"}{" "}
               </span>
               <div className="mt-3">
                 <h2 className="text-start text-sm text-white/30">SUMMARY</h2>
