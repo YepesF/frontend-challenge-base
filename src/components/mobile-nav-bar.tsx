@@ -5,7 +5,7 @@ import { BookmarkIcon, HomeIcon, MagnifyingGlassIcon } from "./icons";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export default function MovileNavBar(): JSX.Element {
+export default function MobileNavBar(): JSX.Element {
   const pathname = usePathname();
   return (
     <div className="fixed bottom-0 z-10 flex h-24 w-full items-start justify-center gap-20 bg-secondary/80 py-1 pt-3 backdrop-blur-sm backdrop-filter">
