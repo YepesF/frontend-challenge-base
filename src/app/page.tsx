@@ -19,8 +19,8 @@ export default async function Home({
   const page = searchParams.page || "1";
   const query = searchParams.query || "";
   const movies = query
-    ? await getMovies(page)
-    : await getMoviesByQuery(query, page);
+    ? await getMoviesByQuery(query, page)
+    : await getMovies(page);
 
   return (
     <RootLayout>
