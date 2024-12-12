@@ -1,4 +1,3 @@
-import RootLayout from "./layout";
 import Image from "next/image";
 import { getMovies, getMoviesByQuery } from "@/actions/movie";
 import { Card, CardHeader } from "@/components/ui/card";
@@ -20,7 +19,7 @@ export default async function Home({
     : await getMovies(page);
 
   return (
-    <RootLayout>
+    <div className="w-full">
       <div className="fixed left-5 top-10 z-50 w-min">
         <div className="relative h-10 w-40">
           <Image src="/Logo.png" alt="logo" fill />
@@ -109,6 +108,6 @@ export default async function Home({
           totalPages={movies.total_pages}
         />
       )}
-    </RootLayout>
+    </div>
   );
 }
