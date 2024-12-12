@@ -127,3 +127,35 @@ export interface IMovieDetailTMDB {
   credits: ICredits;
   videos: IVideos;
 }
+
+export interface IMovieDetailResponse {
+  id: number;
+  poster_path: string;
+  vote_average: number;
+  title: string;
+  genres: IGenre[];
+  trailer: string;
+  // adult: boolean;
+  // backdrop_path: string;
+  // belongs_to_collection: IBelongToCollection;
+  // budget: number;
+  // homepage: string;
+  // imdb_id: string;
+  // origin_country: string[];
+  // original_language: string;
+  // original_title: string;
+  // overview: string;
+  // popularity: number;
+  // production_companies: ICompany[];
+  // production_countries: ICountry[];
+  // release_date: string;
+  // revenue: number;
+  // runtime: number;
+  // spoken_languages: ILanguage[];
+  // status: string;
+  // tagline: string;
+  // video: boolean;
+  // vote_count: number;
+  // credits: ICredits;
+  // videos: IVideos;
+}
