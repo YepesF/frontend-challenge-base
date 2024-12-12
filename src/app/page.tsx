@@ -56,7 +56,7 @@ export default async function Home({
                 Watch now
               </Button>
             </Link>
-            <FavoriteButton />
+            <FavoriteButton variant="solid" />
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ export default async function Home({
                       {movieBanner.vote_average.toFixed(1)}
                     </span>
                   </div>
-                  <FavoriteButton />
+                  <FavoriteButton variant="outline" />
                 </div>
               </CardHeader>
             </Card>
