@@ -91,7 +91,7 @@ export default async function Home({
                       <Image src="/imdb.png" alt="imdb" fill />
                     </div>
                     <span className="w-min font-semibold text-white">
-                      {movie.vote_average.toFixed(1)}
+                      {movie.vote_average?.toFixed(1)}
                     </span>
                   </div>
                   <FavoriteButton
