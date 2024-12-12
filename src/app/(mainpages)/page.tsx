@@ -19,13 +19,13 @@ export default async function Home({
     : await getMovies(page);
 
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col items-center px-0 xl:px-16">
       <div className="fixed left-5 top-10 z-50 w-min xl:hidden">
         <div className="relative h-10 w-40">
           <Image src="/Logo.png" alt="logo" fill />
         </div>
       </div>
-      <div className="relative flex h-[50vh] items-center justify-center shadow-xl">
+      <div className="relative flex h-[50vh] items-center justify-center overflow-hidden shadow-xl xl:aspect-video xl:h-full xl:rounded-xl">
         <Image
           src={`https://image.tmdb.org/t/p/original${movieBanner.poster_path}`}
           alt="banner"
@@ -36,21 +36,21 @@ export default async function Home({
           }}
         />
 
-        <div className="absolute bottom-10 left-5 z-50 flex w-fit flex-col items-start justify-start">
+        <div className="absolute bottom-10 left-5 flex w-fit flex-col items-start justify-start">
           <div className="flex items-center justify-start gap-2">
-            <div className="relative h-10 w-10">
+            <div className="relative h-10 w-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14">
               <Image src="/imdb.png" alt="imdb" fill />
             </div>
-            <span className="w-min font-semibold text-white">
+            <span className="w-min font-semibold text-white 2xl:text-2xl">
               {movieBanner.vote_average.toFixed(1)}
             </span>
           </div>
-          <h1 className="w-fit text-2xl font-bold text-white">
+          <h1 className="w-fit text-2xl font-bold text-white xl:text-3xl 2xl:text-5xl">
             {movieBanner.title}
           </h1>
           <div className="flex w-72 items-center justify-between pt-6">
             <Link href={`/movies/${movieBanner.id}`} className="w-fit">
-              <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
+              <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95 2xl:w-48">
                 Watch now
               </Button>
             </Link>
@@ -59,17 +59,17 @@ export default async function Home({
       </div>
       {!movies.results.length && (
         <div className="flex h-[50vh] flex-col items-center justify-center gap-4">
-          <span className="text-center text-4xl text-accent">
+          <span className="text-center text-4xl text-accent 2xl:text-5xl">
             Movie no found
           </span>
           <Link href={`/`} className="w-fit">
-            <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
+            <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95 2xl:w-48">
               Back
             </Button>
           </Link>
         </div>
       )}
-      <div className="grid grid-cols-2 gap-3 px-4 py-8 md:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 px-4 py-8 md:grid-cols-4 xl:gap-5 2xl:grid-cols-5 2xl:gap-6">
         {movies.results.map((movie) => (
           <Link key={`movie-${movie.id}`} href={`/movies/${movie.id}`}>
             <Card className="cursor-pointer overflow-hidden bg-gray-700 transition hover:scale-[1.03]">
@@ -84,11 +84,11 @@ export default async function Home({
                   fill
                 />
                 <div className="absolute -left-0 top-2 flex w-full items-center justify-between px-4">
-                  <div className="flex w-fit items-center justify-start gap-2 rounded-full bg-secondary/30 px-2">
-                    <div className="relative h-6 w-6">
+                  <div className="flex w-fit items-center justify-center gap-2 rounded-full bg-secondary/30 px-2">
+                    <div className="relative h-6 w-6 2xl:h-10 2xl:w-10">
                       <Image src="/imdb.png" alt="imdb" fill />
                     </div>
-                    <span className="w-min font-semibold text-white">
+                    <span className="w-min font-semibold text-white 2xl:text-xl">
                       {movie.vote_average?.toFixed(1)}
                     </span>
                   </div>
@@ -108,10 +108,12 @@ export default async function Home({
         ))}
       </div>
       {movies.results.length && (
-        <MoviePagination
-          currentPage={movies.page}
-          totalPages={movies.total_pages}
-        />
+        <div className="mb-32 flex w-full justify-center xl:mb-10">
+          <MoviePagination
+            currentPage={movies.page}
+            totalPages={movies.total_pages}
+          />
+        </div>
       )}
     </div>
   );

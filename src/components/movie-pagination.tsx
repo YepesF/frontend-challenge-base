@@ -82,7 +82,7 @@ export default function MoviePagination({
   };
 
   return (
-    <Pagination className="mb-32 w-min">
+    <Pagination className="w-min">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

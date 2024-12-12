@@ -1,4 +1,4 @@
-import DesktopNavBar from "@/components/desktop-nav-bar copy";
+import DesktopNavBar from "@/components/desktop-nav-bar";
 import MobileNavBar from "@/components/mobile-nav-bar";
 
 export default function RootLayout({

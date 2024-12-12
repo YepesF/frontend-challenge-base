@@ -34,6 +34,7 @@ export default function SearchMovie({
   };
 
   const handleClick = (textQuery: string): void => {
+    addRecentSearch(textQuery);
     router.push(`/?query=${encodeURIComponent(textQuery)}`);
   };
 
