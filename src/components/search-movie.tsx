@@ -18,7 +18,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { MagnifyingGlassIcon } from "./icons";
 import { Input } from "./ui/input";
-import useParams from "@/hooks/useParams";
+import { useRouter } from "next/navigation";
 
 interface ISearchMovieProps {
   children: React.ReactNode;
@@ -27,12 +27,12 @@ interface ISearchMovieProps {
 export default function SearchMovie({
   children,
 }: ISearchMovieProps): JSX.Element {
-  const { updateParam } = useParams();
+  const router = useRouter();
   const [query, setQuery] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    updateParam("query", query);
+    router.push(`/?query=${encodeURIComponent(query)}`);
     setQuery("");
   };
 
