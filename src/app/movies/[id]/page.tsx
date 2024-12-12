@@ -116,7 +116,7 @@ export default async function MoviePage({
           <h2 className="mb-3 text-sm text-white">Cast</h2>
           <div className="scrollbar-hidden flex space-x-4 overflow-x-auto whitespace-nowrap">
             {movie.cast.map((actor) => (
-              <div key={`actor-${actor.id}`} className="">
+              <div key={`actor-${actor.id}`} className="w-44">
                 <div className="relative h-60 w-44">
                   <Image
                     src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
@@ -126,7 +126,9 @@ export default async function MoviePage({
                   />
                 </div>
                 <h2 className="mt-2 w-fit text-sm text-white">{actor.name}</h2>
-                <span className="text-xs text-white/60">{actor.character}</span>
+                <p className="truncate text-xs text-white/60">
+                  {actor.character}
+                </p>
               </div>
             ))}
           </div>
