@@ -20,7 +20,7 @@ export default async function Home({
 
   return (
     <div className="w-full">
-      <div className="fixed left-5 top-10 z-50 w-min">
+      <div className="fixed left-5 top-10 z-50 w-min xl:hidden">
         <div className="relative h-10 w-40">
           <Image src="/Logo.png" alt="logo" fill />
         </div>

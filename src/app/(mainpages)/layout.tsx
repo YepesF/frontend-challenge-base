@@ -1,3 +1,4 @@
+import DesktopNavBar from "@/components/desktop-nav-bar copy";
 import MobileNavBar from "@/components/mobile-nav-bar";
 
 export default function RootLayout({
@@ -7,8 +8,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <div className="h-full w-full">
-      <MobileNavBar />
+      <DesktopNavBar />
       <div className="h-full min-h-screen w-full">{children}</div>
+      <MobileNavBar />
     </div>
   );
 }

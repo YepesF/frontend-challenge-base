@@ -16,7 +16,7 @@ export default function MobileNavBar(): JSX.Element {
   }, [pathname]);
 
   return (
-    <div className="fixed bottom-0 z-50 flex h-24 w-full items-start justify-center gap-20 bg-secondary/80 py-1 pt-3 backdrop-blur-sm backdrop-filter">
+    <div className="fixed bottom-0 z-50 flex h-24 w-full items-start justify-center gap-20 bg-secondary/80 py-1 pt-3 backdrop-blur-sm backdrop-filter xl:hidden">
       <Link
         href="/"
         className={cn(
