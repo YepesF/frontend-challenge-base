@@ -10,9 +10,9 @@ export default function FavoritesPage(): JSX.Element {
   const { favoriteMovies } = useLocalStorage();
 
   return (
-    <div className="mb-32 min-h-screen w-full">
+    <div className="mb-32 min-h-[95vh] w-full px-5">
       {!favoriteMovies.length && (
-        <div className="flex min-h-screen flex-col items-center justify-center gap-4">
+        <div className="flex min-h-[95vh] flex-col items-center justify-center gap-4">
           <span className="text-center text-4xl text-accent">
             You haven't added any movies to your favorites yet. Start adding
             some!

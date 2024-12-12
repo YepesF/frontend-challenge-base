@@ -46,7 +46,7 @@ export default async function MoviePage({
 
   return (
     <div>
-      <div className="relative flex h-[50vh] items-center justify-center shadow-xl">
+      <div className="relative flex h-[45vh] items-center justify-center shadow-xl">
         <Link
           href="/"
           className="absolute left-5 top-5 z-50 w-min cursor-pointer rounded-full bg-secondary p-2 text-white transition hover:scale-[1.03] hover:bg-accent"
