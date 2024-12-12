@@ -1,6 +1,10 @@
 "use server";
 
-import { IMovieDetailTMDB, IResponseTMDB } from "@/interfaces/TMDB";
+import {
+  IMovieDetailResponse,
+  IMovieDetailTMDB,
+  IResponseTMDB,
+} from "@/interfaces/TMDB";
 
 export const getMovies = async (page: string = "1"): Promise<IResponseTMDB> => {
   try {
@@ -18,8 +22,8 @@ export const getMovies = async (page: string = "1"): Promise<IResponseTMDB> => {
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
-    const json: IResponseTMDB = await res.json();
-    return json;
+    const moviesData: IResponseTMDB = await res.json();
+    return moviesData;
   } catch (error) {
     return {
       results: [],
@@ -49,8 +53,8 @@ export const getMoviesByQuery = async (
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
-    const json: IResponseTMDB = await res.json();
-    return json;
+    const moviesData: IResponseTMDB = await res.json();
+    return moviesData;
   } catch (error) {
     return {
       results: [],
@@ -61,7 +65,9 @@ export const getMoviesByQuery = async (
   }
 };
 
-export const getMovieById = async (id: number): Promise<IMovieDetailTMDB> => {
+export const getMovieById = async (
+  id: number,
+): Promise<IMovieDetailResponse> => {
   try {
     const url = `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits,videos`;
     const options = {
@@ -77,9 +83,21 @@ export const getMovieById = async (id: number): Promise<IMovieDetailTMDB> => {
       throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
-    const json: IMovieDetailTMDB = await res.json();
-    return json;
+    const movieData: IMovieDetailTMDB = await res.json();
+    const youtubeId =
+      movieData.videos.results.find(
+        ({ type }) => type === "Trailer" || type === "Teaser",
+      )?.key || "";
+
+    return {
+      id: movieData.id,
+      poster_path: movieData.poster_path,
+      vote_average: movieData.vote_average,
+      title: movieData.title,
+      genres: movieData.genres,
+      trailer: youtubeId ? `https://www.youtube.com/watch?v=${youtubeId}` : "",
+    } as IMovieDetailResponse;
   } catch (error) {
-    return {} as IMovieDetailTMDB;
+    return {} as IMovieDetailResponse;
   }
 };
