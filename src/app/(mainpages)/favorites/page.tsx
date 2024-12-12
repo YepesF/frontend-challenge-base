@@ -24,7 +24,7 @@ export default function FavoritesPage(): JSX.Element {
           </Link>
         </div>
       )}
-      <div className="grid grid-cols-2 gap-3 px-4 py-8 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 px-4 py-8 md:grid-cols-4 xl:grid-cols-5">
         {favoriteMovies.map((movie) => {
           if (!movie.id) {
             return null;

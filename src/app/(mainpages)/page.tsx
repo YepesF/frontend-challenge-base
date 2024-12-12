@@ -69,7 +69,7 @@ export default async function Home({
           </Link>
         </div>
       )}
-      <div className="grid grid-cols-2 gap-3 px-4 py-8 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 px-4 py-8 md:grid-cols-4 xl:grid-cols-5">
         {movies.results.map((movie) => (
           <Link key={`movie-${movie.id}`} href={`/movies/${movie.id}`}>
             <Card className="cursor-pointer overflow-hidden bg-gray-700 transition hover:scale-[1.03]">

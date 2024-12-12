@@ -40,7 +40,7 @@ export default function SearchMovie({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="w-11/12 rounded-lg border p-0 shadow-md md:min-w-[450px]">
+      <DialogContent className="w-11/12 rounded-lg border p-0 shadow-md lg:w-[550px]">
         <DialogHeader className="hidden">
           <DialogTitle></DialogTitle>
         </DialogHeader>
