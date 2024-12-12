@@ -4,16 +4,17 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { BookmarkIcon } from "./icons";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { IFavoriteMovie } from "@/interfaces/TMDB";
 
 interface IFavoriteButton {
   variant: "outline" | "solid";
-  movieId: string;
+  movie: IFavoriteMovie;
   className?: string;
 }
 
 export default function FavoriteButton({
   variant,
-  movieId,
+  movie,
   className,
 }: IFavoriteButton): JSX.Element {
   const { favoriteMovies, addFavoriteMovie, removeFavoriteMovie } =
@@ -21,13 +22,13 @@ export default function FavoriteButton({
   const [favorite, setFavorite] = useState<boolean>(false);
 
   const handleClick = (): void => {
-    favorite ? removeFavoriteMovie(movieId) : addFavoriteMovie(movieId);
+    favorite ? removeFavoriteMovie(movie.id) : addFavoriteMovie(movie);
     setFavorite(!favorite);
   };
 
   useEffect(() => {
-    setFavorite(favoriteMovies.includes(movieId));
-  }, [favoriteMovies, movieId]);
+    setFavorite(favoriteMovies.some(({ id }) => id === movie.id));
+  }, [favoriteMovies, movie]);
 
   if (variant === "outline") {
     return (

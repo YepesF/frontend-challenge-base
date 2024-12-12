@@ -148,21 +148,11 @@ export interface IMovieDetailResponse {
   spoken_languages: string;
   production_countries: string;
   cast: ICast[];
-  // adult: boolean;
-  // backdrop_path: string;
-  // belongs_to_collection: IBelongToCollection;
-  // budget: number;
-  // homepage: string;
-  // imdb_id: string;
-  // origin_country: string[];
-  // original_language: string;
-  // original_title: string;
-  // popularity: number;
-  // production_companies: ICompany[];
-  // revenue: number;
-  // status: string;
-  // tagline: string;
-  // video: boolean;
-  // vote_count: number;
-  // videos: IVideos;
+}
+
+export interface IFavoriteMovie {
+  id: string;
+  title: string;
+  poster_path: string;
+  vote_average: number;
 }

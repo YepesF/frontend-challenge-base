@@ -55,7 +55,12 @@ export default async function MoviePage({
         </Link>
         <FavoriteButton
           variant="outline"
-          movieId={params.id}
+          movie={{
+            id: movie.id.toString(),
+            title: movie.title,
+            poster_path: movie.poster_path,
+            vote_average: movie.vote_average,
+          }}
           className="absolute right-6 top-6 z-50"
         />
         <Image

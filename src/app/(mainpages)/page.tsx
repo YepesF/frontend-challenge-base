@@ -94,7 +94,12 @@ export default async function Home({
                   </div>
                   <FavoriteButton
                     variant="outline"
-                    movieId={movie.id.toString()}
+                    movie={{
+                      id: movie.id.toString(),
+                      title: movie.title,
+                      poster_path: movie.poster_path,
+                      vote_average: movie.vote_average,
+                    }}
                   />
                 </div>
               </CardHeader>
