@@ -45,7 +45,7 @@ export default async function MoviePage({
   }
 
   return (
-    <div>
+    <div className="mb-32 h-full w-full">
       <div className="relative flex h-[45vh] items-center justify-center shadow-xl">
         <Link
           href="/"
