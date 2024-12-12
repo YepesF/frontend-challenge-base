@@ -1,6 +1,7 @@
 import { getMovieById, getMovies } from "@/actions/movie";
 import FavoriteButton from "@/components/favorite-button";
 import { ChevronLeftIcon } from "@/components/icons";
+import TrailerDialog from "@/components/trailer-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -73,11 +74,13 @@ export default async function MoviePage({
                 </Badge>
               ))}
             </div>
-            <Link href={`/movies/${movie.id}`} className="w-fit">
-              <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
-                Trailer
-              </Button>
-            </Link>
+            {movie.trailer && (
+              <TrailerDialog url={movie.trailer}>
+                <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
+                  Trailer
+                </Button>
+              </TrailerDialog>
+            )}
           </div>
         </div>
       </div>
