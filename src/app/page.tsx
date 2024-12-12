@@ -6,7 +6,6 @@ import FavoriteButton from "@/components/favorite-button";
 import MoviePagination from "@/components/movie-pagination";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import MobileNavBar from "@/components/mobile-nav-bar";
 
 export default async function Home({
   searchParams,
@@ -110,7 +109,6 @@ export default async function Home({
           totalPages={movies.total_pages}
         />
       )}
-      <MobileNavBar />
     </RootLayout>
   );
 }
