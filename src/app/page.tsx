@@ -6,6 +6,7 @@ import FavoriteButton from "@/components/favorite-button";
 import MoviePagination from "@/components/movie-pagination";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import MobileNavBar from "@/components/mobile-nav-bar";
 
 export default async function Home({
   searchParams,
@@ -50,13 +51,27 @@ export default async function Home({
             {movieBanner.title}
           </h1>
           <div className="flex w-72 items-center justify-between pt-6">
-            <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
-              Watch now
-            </Button>
+            <Link href={`/movies/${movieBanner.id}`} className="w-fit">
+              <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
+                Watch now
+              </Button>
+            </Link>
             <FavoriteButton />
           </div>
         </div>
       </div>
+      {!movies.results.length && (
+        <div className="flex h-[50vh] flex-col items-center justify-center gap-4">
+          <span className="text-center text-4xl text-accent">
+            Movie no found
+          </span>
+          <Link href={`/`} className="w-fit">
+            <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
+              Back
+            </Button>
+          </Link>
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-3 px-4 py-8 lg:grid-cols-4 xl:grid-cols-5">
         {movies.results.map((movie) => (
           <Link key={`movie-${movie.id}`} href={`/movies/${movie.id}`}>
@@ -87,10 +102,13 @@ export default async function Home({
           </Link>
         ))}
       </div>
-      <MoviePagination
-        currentPage={movies.page}
-        totalPages={movies.total_pages}
-      />
+      {movies.results.length && (
+        <MoviePagination
+          currentPage={movies.page}
+          totalPages={movies.total_pages}
+        />
+      )}
+      <MobileNavBar />
     </RootLayout>
   );
 }
