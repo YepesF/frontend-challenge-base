@@ -73,6 +73,13 @@ interface IVideos {
   results: IVideo[];
 }
 
+interface ICast {
+  id: number;
+  name: string;
+  profile_path: string;
+  character: string;
+}
+
 export interface IMovie {
   adult: boolean;
   backdrop_path: string;
@@ -135,6 +142,12 @@ export interface IMovieDetailResponse {
   title: string;
   genres: IGenre[];
   trailer: string;
+  release_date: string;
+  runtime: string;
+  overview: string;
+  spoken_languages: string;
+  production_countries: string;
+  cast: ICast[];
   // adult: boolean;
   // backdrop_path: string;
   // belongs_to_collection: IBelongToCollection;
@@ -144,18 +157,12 @@ export interface IMovieDetailResponse {
   // origin_country: string[];
   // original_language: string;
   // original_title: string;
-  // overview: string;
   // popularity: number;
   // production_companies: ICompany[];
-  // production_countries: ICountry[];
-  // release_date: string;
   // revenue: number;
-  // runtime: number;
-  // spoken_languages: ILanguage[];
   // status: string;
   // tagline: string;
   // video: boolean;
   // vote_count: number;
-  // credits: ICredits;
   // videos: IVideos;
 }

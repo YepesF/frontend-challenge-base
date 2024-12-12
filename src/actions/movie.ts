@@ -5,6 +5,7 @@ import {
   IMovieDetailTMDB,
   IResponseTMDB,
 } from "@/interfaces/TMDB";
+import { parseDate, parseDuration } from "@/lib/parse";
 
 export const getMovies = async (page: string = "1"): Promise<IResponseTMDB> => {
   try {
@@ -89,6 +90,15 @@ export const getMovieById = async (
         ({ type }) => type === "Trailer" || type === "Teaser",
       )?.key || "";
 
+    const cast = movieData.credits.cast
+      .filter((actor) => actor.profile_path)
+      .map((actor) => ({
+        id: actor.id,
+        name: actor.name,
+        profile_path: actor.profile_path,
+        character: actor.character,
+      }));
+
     return {
       id: movieData.id,
       poster_path: movieData.poster_path,
@@ -96,6 +106,14 @@ export const getMovieById = async (
       title: movieData.title,
       genres: movieData.genres,
       trailer: youtubeId ? `https://www.youtube.com/watch?v=${youtubeId}` : "",
+      release_date: parseDate(movieData.release_date),
+      runtime: parseDuration(movieData.runtime),
+      overview: movieData.overview,
+      spoken_languages: movieData.spoken_languages
+        .map((language) => language.english_name)
+        .join(", "),
+      production_countries: movieData.production_countries[0].name,
+      cast,
     } as IMovieDetailResponse;
   } catch (error) {
     return {} as IMovieDetailResponse;

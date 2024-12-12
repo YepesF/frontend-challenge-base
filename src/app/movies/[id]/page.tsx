@@ -53,7 +53,7 @@ export default async function MoviePage({
             maskImage: "linear-gradient(black 30%, transparent)",
           }}
         />
-        <div className="absolute bottom-10 left-5 z-50 flex w-fit flex-col items-start justify-start">
+        <div className="absolute bottom-5 left-5 z-50 flex w-fit flex-col items-start justify-start">
           <div className="flex items-center justify-start gap-2">
             <div className="relative h-10 w-10">
               <Image src="/imdb.png" alt="imdb" fill />
@@ -65,8 +65,9 @@ export default async function MoviePage({
           <h1 className="w-fit text-2xl font-bold text-white">{movie.title}</h1>
           <div className="flex w-full flex-col items-start justify-between gap-4">
             <div className="flex gap-2 py-2">
-              {movie.genres.slice(0, 4).map(({ name }) => (
+              {movie.genres.slice(0, 4).map(({ id, name }) => (
                 <Badge
+                  key={`genre-${id}`}
                   className="w-fit rounded-full border-accent bg-accent/15 text-accent"
                   variant="outline"
                 >
@@ -81,6 +82,53 @@ export default async function MoviePage({
                 </Button>
               </TrailerDialog>
             )}
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-3 px-4 py-4">
+        <ul className="flex w-fit items-center justify-start gap-2 text-white">
+          <li className="w-fit text-sm">{movie.release_date || "-"}</li>
+          <li className="w-fit text-sm">·</li>
+          <li className="w-fit text-sm">{movie.runtime || "-"}</li>
+        </ul>
+        <p className="text-sm text-white/60">{movie.overview}</p>
+        <ul className="grid w-full grid-cols-2 gap-4">
+          <li>
+            <h2 className="text-sm text-white">Audio Track</h2>
+            <span className="text-sm text-white/60">
+              {movie.spoken_languages || "-"}
+            </span>
+          </li>
+          <li>
+            <h2 className="text-sm text-white">Subtitles</h2>
+            <span className="text-sm text-white/60">
+              {movie.spoken_languages || "-"}
+            </span>
+          </li>
+          <li>
+            <h2 className="text-sm text-white">County</h2>
+            <span className="text-sm text-white/60">
+              {movie.production_countries || "-"}
+            </span>
+          </li>
+        </ul>
+        <div className="w-full">
+          <h2 className="mb-3 text-sm text-white">Cast</h2>
+          <div className="scrollbar-hidden flex space-x-4 overflow-x-auto whitespace-nowrap">
+            {movie.cast.map((actor) => (
+              <div key={`actor-${actor.id}`} className="">
+                <div className="relative h-60 w-44">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
+                    alt={actor.name}
+                    fill
+                    className="rounded-sm"
+                  />
+                </div>
+                <h2 className="mt-2 w-fit text-sm text-white">{actor.name}</h2>
+                <span className="text-xs text-white/60">{actor.character}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
