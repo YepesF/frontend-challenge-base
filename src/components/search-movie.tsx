@@ -8,17 +8,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { MagnifyingGlassIcon } from "./icons";
 import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface ISearchMovieProps {
   children: React.ReactNode;
@@ -27,13 +22,19 @@ interface ISearchMovieProps {
 export default function SearchMovie({
   children,
 }: ISearchMovieProps): JSX.Element {
+  const { addRecentSearch, recentSearches } = useLocalStorage();
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    addRecentSearch(query);
     router.push(`/?query=${encodeURIComponent(query)}`);
     setQuery("");
+  };
+
+  const handleClick = (textQuery: string): void => {
+    router.push(`/?query=${encodeURIComponent(textQuery)}`);
   };
 
   return (
@@ -68,21 +69,35 @@ export default function SearchMovie({
             </Button>
           </DialogClose>
         </form>
-        <Command className="">
-          <CommandList>
-            <CommandGroup heading="Recent searches">
-              <CommandItem>
-                <span>Calendar</span>
-              </CommandItem>
-              <CommandItem>
-                <span>Search Emoji</span>
-              </CommandItem>
-              <CommandItem disabled>
-                <span>Calculator</span>
-              </CommandItem>
-            </CommandGroup>
-          </CommandList>
-        </Command>
+        <span className="px-5 text-xs text-gray-500">Recent searches</span>
+        <div className="flex max-h-40 flex-col gap-3 overflow-auto px-3 pb-3">
+          {recentSearches.length
+            ? recentSearches.map((search, index) => (
+                <DialogClose
+                  key={`search-${search + index}`}
+                  className="cursor-pointer rounded-md p-2 hover:bg-accent/30 hover:text-accent"
+                  asChild
+                >
+                  <span onClick={() => handleClick(search)}>{search}</span>
+                </DialogClose>
+              ))
+            : [
+                "Batman",
+                "Superman",
+                "Spiderman",
+                "Batman",
+                "Superman",
+                "Spiderman",
+              ].map((search, index) => (
+                <DialogClose
+                  key={`search-${search + index}`}
+                  className="cursor-pointer rounded-md p-2 hover:bg-accent/30 hover:text-accent"
+                  asChild
+                >
+                  <span onClick={() => handleClick(search)}>{search}</span>
+                </DialogClose>
+              ))}
+        </div>
       </DialogContent>
     </Dialog>
   );
