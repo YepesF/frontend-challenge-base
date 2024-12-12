@@ -1,19 +1,33 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookmarkIcon } from "./icons";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface IFavoriteButton {
   variant: "outline" | "solid";
+  movieId: string;
   className?: string;
 }
 
 export default function FavoriteButton({
   variant,
+  movieId,
   className,
 }: IFavoriteButton): JSX.Element {
+  const { favoriteMovies, addFavoriteMovie, removeFavoriteMovie } =
+    useLocalStorage();
   const [favorite, setFavorite] = useState<boolean>(false);
+
+  const handleClick = (): void => {
+    favorite ? removeFavoriteMovie(movieId) : addFavoriteMovie(movieId);
+    setFavorite(!favorite);
+  };
+
+  useEffect(() => {
+    setFavorite(favoriteMovies.includes(movieId));
+  }, [favoriteMovies, movieId]);
 
   if (variant === "outline") {
     return (
@@ -23,7 +37,7 @@ export default function FavoriteButton({
           favorite && "p-2 text-accent",
           className,
         )}
-        onClick={() => setFavorite(!favorite)}
+        onClick={handleClick}
       >
         <BookmarkIcon type={favorite ? "solid" : "outline"} />
       </div>
@@ -37,7 +51,7 @@ export default function FavoriteButton({
         favorite && "bg-accent/30 p-2 text-accent",
         className,
       )}
-      onClick={() => setFavorite(!favorite)}
+      onClick={handleClick}
     >
       <BookmarkIcon type={favorite ? "solid" : "outline"} />
     </div>

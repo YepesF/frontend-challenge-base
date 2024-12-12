@@ -40,6 +40,7 @@ export default async function MoviePage({
         </Link>
         <FavoriteButton
           variant="outline"
+          movieId={params.id}
           className="absolute right-6 top-6 z-50"
         />
         <Image
