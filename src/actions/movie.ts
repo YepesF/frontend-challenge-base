@@ -24,7 +24,10 @@ export const getMovies = async (page: string = "1"): Promise<IResponseTMDB> => {
     }
 
     const moviesData: IResponseTMDB = await res.json();
-    return moviesData;
+    const parsedResults = moviesData.results.filter(
+      (movie) => movie.poster_path && movie.title && movie.overview,
+    );
+    return { ...moviesData, results: parsedResults };
   } catch (error) {
     return {
       results: [],
@@ -55,7 +58,10 @@ export const getMoviesByQuery = async (
     }
 
     const moviesData: IResponseTMDB = await res.json();
-    return moviesData;
+    const parsedResults = moviesData.results.filter(
+      (movie) => movie.poster_path && movie.title && movie.overview,
+    );
+    return { ...moviesData, results: parsedResults };
   } catch (error) {
     return {
       results: [],
@@ -68,7 +74,7 @@ export const getMoviesByQuery = async (
 
 export const getMovieById = async (
   id: number,
-): Promise<IMovieDetailResponse> => {
+): Promise<IMovieDetailResponse | null> => {
   try {
     const url = `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits,videos`;
     const options = {
@@ -116,6 +122,6 @@ export const getMovieById = async (
       cast,
     } as IMovieDetailResponse;
   } catch (error) {
-    return {} as IMovieDetailResponse;
+    return null;
   }
 };

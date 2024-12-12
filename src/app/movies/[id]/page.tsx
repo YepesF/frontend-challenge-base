@@ -30,6 +30,20 @@ export default async function MoviePage({
 }): Promise<JSX.Element> {
   const movieId = parseInt(params.id);
   const movie = await getMovieById(movieId);
+
+  if (!movie) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center gap-4">
+        <span className="text-center text-4xl text-accent">Movie no found</span>
+        <Link href={`/`} className="w-fit">
+          <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
+            Back
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="relative flex h-[50vh] items-center justify-center shadow-xl">
@@ -112,27 +126,31 @@ export default async function MoviePage({
             </span>
           </li>
         </ul>
-        <div className="w-full">
-          <h2 className="mb-3 text-sm text-white">Cast</h2>
-          <div className="scrollbar-hidden flex space-x-4 overflow-x-auto whitespace-nowrap">
-            {movie.cast.map((actor) => (
-              <div key={`actor-${actor.id}`} className="w-44">
-                <div className="relative h-60 w-44">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
-                    alt={actor.name}
-                    fill
-                    className="rounded-sm"
-                  />
+        {movie.cast.length && (
+          <div className="w-full">
+            <h2 className="mb-3 text-sm text-white">Cast</h2>
+            <div className="scrollbar-hidden flex space-x-4 overflow-x-auto whitespace-nowrap">
+              {movie.cast.map((actor) => (
+                <div key={`actor-${actor.id}`} className="w-44">
+                  <div className="relative h-60 w-44">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
+                      alt={actor.name}
+                      fill
+                      className="rounded-sm"
+                    />
+                  </div>
+                  <h2 className="mt-2 w-fit text-sm text-white">
+                    {actor.name}
+                  </h2>
+                  <p className="truncate text-xs text-white/60">
+                    {actor.character}
+                  </p>
                 </div>
-                <h2 className="mt-2 w-fit text-sm text-white">{actor.name}</h2>
-                <p className="truncate text-xs text-white/60">
-                  {actor.character}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
