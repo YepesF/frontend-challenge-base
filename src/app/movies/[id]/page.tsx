@@ -63,7 +63,7 @@ export default async function MoviePage({
             </span>
           </div>
           <h1 className="w-fit text-2xl font-bold text-white">{movie.title}</h1>
-          <div className="flex w-96 flex-col items-start justify-between gap-4">
+          <div className="flex w-full flex-col items-start justify-between gap-4">
             <div className="flex gap-2 py-2">
               {movie.genres.slice(0, 4).map(({ name }) => (
                 <Badge
