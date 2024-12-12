@@ -40,7 +40,7 @@ export default function SearchMovie({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="rounded-lg border p-0 shadow-md md:min-w-[450px]">
+      <DialogContent className="w-11/12 rounded-lg border p-0 shadow-md md:min-w-[450px]">
         <DialogHeader className="hidden">
           <DialogTitle></DialogTitle>
         </DialogHeader>
@@ -81,14 +81,7 @@ export default function SearchMovie({
                   <span onClick={() => handleClick(search)}>{search}</span>
                 </DialogClose>
               ))
-            : [
-                "Batman",
-                "Superman",
-                "Spiderman",
-                "Batman",
-                "Superman",
-                "Spiderman",
-              ].map((search, index) => (
+            : ["Batman", "Superman", "Spiderman"].map((search, index) => (
                 <DialogClose
                   key={`search-${search + index}`}
                   className="cursor-pointer rounded-md p-2 hover:bg-accent/30 hover:text-accent"
