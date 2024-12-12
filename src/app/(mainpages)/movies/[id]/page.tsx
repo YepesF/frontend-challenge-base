@@ -67,6 +67,7 @@ export default async function MoviePage({
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
           alt="banner"
           fill
+          priority
           style={{
             filter: "drop-shadow(0 0 5px rgba(0, 0, 0, 5))",
             maskImage: "linear-gradient(black 30%, transparent)",
@@ -159,6 +160,10 @@ export default async function MoviePage({
                       alt={actor.name}
                       fill
                       className="rounded-sm"
+                      quality={30}
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="/default-movie.webp"
                     />
                   </div>
                   <h2 className="mt-2 w-fit text-sm text-white xl:text-base 2xl:text-lg">

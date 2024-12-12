@@ -41,6 +41,10 @@ export default function FavoritesPage(): JSX.Element {
                     }
                     alt={movie.title || ""}
                     fill
+                    quality={30}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="/default-movie.webp"
                   />
                   <div className="absolute -left-0 top-2 flex w-full items-center justify-between px-4">
                     <div className="flex w-fit items-center justify-start gap-2 rounded-full bg-secondary/30 px-2">

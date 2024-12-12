@@ -30,6 +30,7 @@ export default async function Home({
           src={`https://image.tmdb.org/t/p/original${movieBanner.poster_path}`}
           alt="banner"
           fill
+          priority
           style={{
             filter: "drop-shadow(0 0 5px rgba(0, 0, 0, 5))",
             maskImage: "linear-gradient(black 30%, transparent)",
@@ -82,6 +83,10 @@ export default async function Home({
                   }
                   alt={movie.title}
                   fill
+                  quality={30}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="/default-movie.webp"
                 />
                 <div className="absolute -left-0 top-2 flex w-full items-center justify-between px-4">
                   <div className="flex w-fit items-center justify-center gap-2 rounded-full bg-secondary/30 px-2">
