@@ -31,8 +31,8 @@ export default function FavoritesPage(): JSX.Element {
           }
           return (
             <Link key={`movie-${movie.id}`} href={`/movies/${movie.id}`}>
-              <Card className="cursor-pointer overflow-hidden bg-gray-700 transition hover:scale-[1.03]">
-                <CardHeader className="relative aspect-[2/3]">
+              <Card className="cursor-pointer overflow-hidden border-transparent bg-gray-700 transition hover:scale-[1.03]">
+                <CardHeader className="relative aspect-[2/3] border-transparent">
                   <Image
                     src={
                       movie.poster_path
