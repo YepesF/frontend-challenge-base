@@ -15,6 +15,11 @@ export const parseDate = (dateString: string): string => {
   ];
 
   const [year, month, day] = dateString.split("-");
+
+  if (!year || !month || day) {
+    return "-";
+  }
+
   return `${months[parseInt(month as string, 10) - 1]} ${parseInt(day as string, 10)}, ${year}`;
 };
 
