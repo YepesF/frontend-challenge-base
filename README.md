@@ -1,4 +1,4 @@
-# Movie Explorer
+# Quickbet Movies
 
 Este proyecto es una aplicación desarrollada con [Next.js](https://nextjs.org/) que permite a los usuarios explorar películas, acceder a detalles de cada título y gestionar su lista de favoritos.
 
