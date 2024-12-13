@@ -25,7 +25,7 @@ export default async function Home({
           <Image src="/Logo.png" alt="logo" fill />
         </div>
       </div>
-      <div className="relative flex h-[50vh] items-center justify-center overflow-hidden shadow-xl xl:aspect-video xl:h-full xl:rounded-xl">
+      <div className="relative flex h-[50vh] items-center justify-center overflow-hidden shadow-xl xl:aspect-video xl:h-[80vh] xl:rounded-xl">
         <Image
           src={`https://image.tmdb.org/t/p/original${movieBanner.poster_path}`}
           alt="banner"

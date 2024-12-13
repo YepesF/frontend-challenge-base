@@ -41,7 +41,7 @@ export default async function MoviePage({
 
   return (
     <div className="h-full w-full px-0 pb-32 xl:px-16 xl:pb-10">
-      <div className="relative flex h-[45vh] items-center justify-center overflow-hidden shadow-xl xl:aspect-video xl:h-full xl:rounded-xl">
+      <div className="relative flex h-[45vh] items-center justify-center overflow-hidden shadow-xl xl:aspect-video xl:h-[80vh] xl:rounded-xl">
         <div className="absolute left-5 top-5 z-50">
           <BackButton variant="rounded" />
         </div>
