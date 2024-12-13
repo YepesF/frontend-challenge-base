@@ -1,11 +1,10 @@
 import { getMovieById, getMovies } from "@/actions/movie";
+import BackButton from "@/components/back-button";
 import FavoriteButton from "@/components/favorite-button";
-import { ChevronLeftIcon } from "@/components/icons";
 import TrailerDialog from "@/components/trailer-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Link from "next/link";
 
 export const revalidate = 86400;
 
@@ -35,11 +34,7 @@ export default async function MoviePage({
     return (
       <div className="flex h-screen flex-col items-center justify-center gap-4">
         <span className="text-center text-4xl text-accent">Movie no found</span>
-        <Link href={`/`} className="w-fit">
-          <Button className="w-40 rounded-full bg-accent font-bold text-white transition hover:scale-[1.03] hover:bg-accent/95">
-            Back
-          </Button>
-        </Link>
+        <BackButton variant="primary" />
       </div>
     );
   }
@@ -47,12 +42,9 @@ export default async function MoviePage({
   return (
     <div className="h-full w-full px-0 pb-32 xl:px-16 xl:pb-10">
       <div className="relative flex h-[45vh] items-center justify-center overflow-hidden shadow-xl xl:aspect-video xl:h-full xl:rounded-xl">
-        <Link
-          href="/"
-          className="absolute left-5 top-5 z-50 w-min cursor-pointer rounded-full bg-secondary p-2 text-white transition hover:scale-[1.03] hover:bg-accent"
-        >
-          <ChevronLeftIcon type="outline" />
-        </Link>
+        <div className="absolute left-5 top-5 z-50">
+          <BackButton variant="rounded" />
+        </div>
         <FavoriteButton
           variant="outline"
           movie={{
