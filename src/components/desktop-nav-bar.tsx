@@ -50,12 +50,12 @@ export default function DesktopNavBar(): JSX.Element {
         <div className="relative flex w-80 items-center">
           <MagnifyingGlassIcon
             type="outline"
-            className="absolute left-2 size-4 text-white/60"
+            className="absolute left-2 size-4 text-accent"
           />
           <Input
             type="text"
             placeholder="Search movie"
-            className="h-8 cursor-pointer pl-8 text-xs"
+            className="h-8 cursor-pointer border-accent pl-8 text-xs"
           />
         </div>
       </SearchMovie>
